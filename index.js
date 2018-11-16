@@ -95,6 +95,27 @@ if (config.cacheType === 'memory') {
     app.context.cache = {
         get: () => null,
         set: () => null,
+
+        /**
+         *
+         * try get from cache.
+         * if not exists use `getValue` function to get value, and put into cahche.
+         *
+         * @param key cache key
+         * @param getValueFunc a function to get value. call it when key not exists.
+         * @param maxAge
+         *
+         * @returns {Promise<void>}
+         */
+        tryGet: async function(key, getValueFunc, maxAge) {
+            let v = await this.get(key);
+            if (!v) {
+                v = await getValueFunc();
+                this.set(key, v, maxAge);
+            }
+
+            return v;
+        },
     };
 }
 
@@ -109,6 +130,9 @@ app.use(mount('/protected', protected_router.routes())).use(protected_router.all
 app.use(mount('/api', api_router.routes())).use(api_router.allowedMethods());
 
 // connect
+if (config.connect.disabled) {
+    process.exit();
+}
 if (config.connect.port) {
     app.listen(config.connect.port, parseInt(config.listenInaddrAny) ? null : '127.0.0.1');
     logger.info('Listening Port ' + config.connect.port);

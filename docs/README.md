@@ -91,14 +91,13 @@ Telegram 即时预览模式需要在官网制作页面处理模板，请前往[�
 
 ### 输出格式
 
-RSSHub 同时支持 RSS 2.0、Atom 和 [JSON Feed](https://jsonfeed.org/) 输出格式, 在路由末尾添加 `.rss` `.atom` 或 `.json` 即可请求对应输出格式, 缺省为 RSS 2.0
+RSSHub 同时支持 RSS 2.0 和 Atom 输出格式, 在路由末尾添加 `.rss` 或 `.atom` 即可请求对应输出格式, 缺省为 RSS 2.0
 
 举例:
 
 -   缺省 RSS 2.0 - <https://rsshub.app/jianshu/home>
 -   RSS 2.0 - <https://rsshub.app/jianshu/home.rss>
 -   Atom - <https://rsshub.app/jianshu/home.atom>
--   JSON Feed - <https://rsshub.app/jianshu/home.json>
 -   和 filter 或其他 URL query 一起使用 <https://rsshub.app/bilibili/user/coin/2267573.atom?filter=微小微|赤九玖|暴走大事件>
 
 ## API 接口
@@ -322,7 +321,7 @@ RSSHub 提供下列 API 接口:
 
 ### 微博
 
-<route name="博主（方案1）" author="DIYgod" example="/weibo/user/3306934123" path="/weibo/user/:uid" :paramsDesc="['用户 id, 博主主页打开控制台执行 `$CONFIG.oid` 获取']"/>
+<route name="博主（方案1）" author="DIYgod" example="/weibo/user/1195230310" path="/weibo/user/:uid" :paramsDesc="['用户 id, 博主主页打开控制台执行 `$CONFIG.oid` 获取']"/>
 
 ::: warning 注意
 
@@ -330,7 +329,7 @@ RSSHub 提供下列 API 接口:
 
 :::
 
-<route name="博主（方案2）" author="DIYgod" example="/weibo/user2/3306934123" path="/weibo/user2/:uid" :paramsDesc="['用户 id, 博主主页打开控制台执行 `$CONFIG.oid` 获取']"/>
+<route name="博主（方案2）" author="DIYgod" example="/weibo/user2/1195230310" path="/weibo/user2/:uid" :paramsDesc="['用户 id, 博主主页打开控制台执行 `$CONFIG.oid` 获取']"/>
 
 <route name="关键词" author="DIYgod" example="/weibo/keyword/DIYgod" path="/weibo/keyword/:keyword" :paramsDesc="['你想订阅的微博关键词']"/>
 
@@ -384,15 +383,17 @@ RSSHub 提供下列 API 接口:
 
 <route name="公众平台系统公告栏目" author="xyqfer" example="/wechat/announce" path="/wechat/announce" />
 
+<route name="小程序插件" author="xyqfer" example="/wechat/miniprogram/plugins" path="/wechat/miniprogram/plugins" />
+
 ### 简书
 
-<route name="首页" author="DIYgod" example="/jianshu/home" path="/jianshu/home"/>
+<route name="首页" author="DIYgod HenryQW" example="/jianshu/home" path="/jianshu/home"/>
 
 <route name="热门" author="DIYgod HenryQW" example="/jianshu/trending/weekly" path="/jianshu/trending/:timeframe" :paramsDesc="['按周 `weekly` 或 按月 `monthly`']"/>
 
-<route name="专题" author="DIYgod" example="/jianshu/collection/xYuZYD" path="/jianshu/collection/:id" :paramsDesc="['专题 id, 可在专题页 URL 中找到']"/>
+<route name="专题" author="DIYgod HenryQW" example="/jianshu/collection/xYuZYD" path="/jianshu/collection/:id" :paramsDesc="['专题 id, 可在专题页 URL 中找到']"/>
 
-<route name="作者" author="DIYgod" example="/jianshu/user/yZq3ZV" path="/jianshu/user/:id" :paramsDesc="['作者 id, 可在作者主页 URL 中找到']"/>
+<route name="作者" author="DIYgod HenryQW" example="/jianshu/user/yZq3ZV" path="/jianshu/user/:id" :paramsDesc="['作者 id, 可在作者主页 URL 中找到']"/>
 
 ### 知乎
 
@@ -419,6 +420,12 @@ RSSHub 提供下列 API 接口:
 <route name="问题" author="xyqfer" example="/zhihu/question/59895982" path="/zhihu/question/:questionId" :paramsDesc="['问题 id']"/>
 
 <route name="话题" author="xyqfer" example="/zhihu/topic/19828946" path="/zhihu/topic/:topicId" :paramsDesc="['话题 id']"/>
+
+<route name="用户想法" author="xyqfer" example="/zhihu/people/pins/kan-dan-45" path="/zhihu/people/pins/:id" :paramsDesc="['作者 id, 可在用户主页 URL 中找到']"/>
+
+<route name="知乎书店-新书" author="xyqfer" example="/zhihu/bookstore/newest" path="/zhihu/bookstore/newest"/>
+
+<route name="知乎想法-24小时新闻汇总" author="xyqfer" example="/zhihu/pin/daily" path="/zhihu/pin/daily"/>
 
 ### pixiv
 
@@ -512,6 +519,8 @@ RSSHub 提供下列 API 接口:
 
 订阅要求: 将机器人 [@RSSHub_bot](https://t.me/RSSHub_bot) 加为频道管理员, 然后发一条消息后才可正常获取数据
 
+如果是私有频道，`username`请传入频道`id`(比如`-1001001234567`)，具体获取可参考[这里](https://stackoverflow.com/questions/33858927/how-to-obtain-the-chat-id-of-a-private-telegram-channel)
+
 :::
 
 </route>
@@ -586,6 +595,12 @@ RSSHub 提供下列 API 接口:
 
 </route>
 
+<route name="小册" author="xyqfer" example="/juejin/books" path="/juejin/books"/>
+
+> 掘金小册需要付费订阅, RSS 仅做更新提醒, 不含付费内容.
+
+<route name="沸点" author="xyqfer" example="/juejin/pins" path="/juejin/pins"/>
+
 ### Dockone
 
 <route name="周报" author="csi0n" example="/dockone/weekly" path="/dockone/weekly"/>
@@ -615,6 +630,7 @@ GitHub 官方也提供了一些 RSS:
 -   仓库 releases: https://github.com/:owner/:repo/releases.atom
 -   仓库 commits: https://github.com/:owner/:repo/commits.atom
 -   用户动态: https://github.com/:user.atom
+-   专属动态: https://github.com/:user.private.atom?token=:secret (登录后在[仪表盘页面](https://github.com)找到 **Subscribe to your news feed** 字样即可)
 
 :::
 
@@ -721,6 +737,30 @@ GitHub 官方也提供了一些 RSS:
 
 </route>
 
+<route name="小程序商店-最新" author="xyqfer" example="/miniapp/store/newest" path="/miniapp/store/newest"/>
+
+### 技术头条
+
+<route name="最新分享" author="xyqfer" example="/blogread/newest" path="/blogread/newest"/>
+
+### GitChat
+
+<route name="最新" author="xyqfer" example="/gitchat/newest" path="/gitchat/newest"/>
+
+> GitChat 需要付费订阅, RSS 仅做更新提醒, 不含付费内容.
+
+### Gitea
+
+<route name="博客" author="cnzgray" example="/gitea/blog" path="/gitea/blog">
+
+> gitea 博客一般发布最新的 release 信息，路由选择用 blog 名称主要因为其地址名为 blog，而非 changlog，慎重起见还是用 blog 命名。
+
+</route>
+
+### TesterHome
+
+<route name="最新发布" author="xyqfer" example="/testerhome/newest" path="/testerhome/newest"/>
+
 ## 直播
 
 ### 哔哩哔哩直播
@@ -779,6 +819,10 @@ GitHub 官方也提供了一些 RSS:
 
 <route name="动漫" author="ranpox" example="/iqiyi/dongman/a_19rrh1sifx" path="/iqiyi/dongman/:id" :paramsDesc="['动漫 id, 可在该动漫主页 URL 中找到(不包括`.html`)']"/>
 
+### 腾讯视频
+
+ <route name="播放列表" author="Andiedie" example="/tencentvideo/playlist/jx7g4sm320sqm7i" path="/tencentvideo/playlist/:id" :paramsDesc="['播放列表 ID，可以在 URL 中找到']" />
+
 ### 喜马拉雅
 
 <route name="专辑(支持泛用型播客订阅)" author="lengthmin jjeejj" example="/ximalaya/album/299146" path="/ximalaya/album/:id" :paramsDesc="['专辑 id, 可在对应专辑页面的 URL 中找到']">
@@ -809,7 +853,9 @@ GitHub 官方也提供了一些 RSS:
 
 ### 草榴社区
 
-<route name="分区帖子" author="zhboner" example="/t66y/7" path="/t66y/:id" :paramsDesc="['分区 id, 可在分区页 URL 中找到']">
+<route name="分区帖子" author="zhboner" example="/t66y/20/2" path="/t66y/:id/:type?" :paramsDesc="['分区 id, 可在分区页 URL 中找到', '类型 id, 可在分区类型过滤后的 URL 中找到']">
+
+> 注意：并非所欲的分区都有子类型，可以参考成人文学交流区的[古典武侠]这一子类型。
 
 | 亚洲无码原创区 | 亚洲有码原创区 | 欧美原创区 | 动漫原创区 | 国产原创区 |
 | -------------- | -------------- | ---------- | ---------- | ---------- |
@@ -819,19 +865,43 @@ GitHub 官方也提供了一些 RSS:
 | ---------- | ---------- | ----------- | ---------- |
 | 26         | 27         | 21          | 22         |
 
-| 技术讨论区 | 新时代的我们 | 达盖尔的旗帜 |
-| ---------- | ------------ | ------------ |
-| 7          | 8            | 16           |
+| 技术讨论区 | 新时代的我们 | 达盖尔的旗帜 | 成人文学交流 |
+| ---------- | ------------ | ------------ | ------------ |
+| 7          | 8            | 16           | 20           |
+
+</route>
+
+<route name="帖子跟踪" author="cnzgray" example="/t66y/post/3286088" path="/t66y/post/:tid" :paramsDesc="['帖子 id, 可在帖子 URL 中找到']">
+
+::: tip 提示
+
+帖子 id 查找办法:
+
+打开想跟踪的帖子，比如：http://t66y.com/htm_data/20/1811/3286088.html。其中`3286088`就是帖子id。
+
+:::
+
+</route>
+
+### sexinsex
+
+<route name="分区帖子" author="cnzgray" example="/sexinsex/230/634" path="/sexinsex/:id/:type?" :paramsDesc="['分区 id, 可在分区页 URL 中找到', '类型 id, 可在分区类型过滤后的 URL 中找到']">
+
+> 注意：并非所有的分区都有子类型，可以参考亚洲成人有码原创区的[字幕]这一子类型。
+
+| 亚洲成人无码原创区 | 亚洲成人有码原创区 | 欧美无码原创区 | 欧美无码区 | 亚洲有码薄码区 |
+| ------------------ | ------------------ | -------------- | ---------- | -------------- |
+| 143                | 230                | 229            | 77         | 58             |
 
 </route>
 
 ### 电影首发站
 
-<route name="电影" author="epirus" example="/dysfz" path="/dysfz/index"/>
+<route name="电影" author="epirus" example="/dysfz" path="/dysfz"/>
 
 ### 电影天堂
 
-<route name="新片精品" author="imgss" example="/dytt" path="/dytt/index"/>
+<route name="新片精品" author="imgss" example="/dytt" path="/dytt"/>
 
 ### 优酷
 
@@ -840,6 +910,17 @@ GitHub 官方也提供了一些 RSS:
 ### AcFun
 
 <route name="番剧" author="xyqfer" example="/acfun/bangumi/5022158" path="/acfun/bangumi/:id" :paramsDesc="['番剧 id']"/>
+
+::: tip 提示
+
+番剧 id 不包含开头的 aa。
+例如：http://www.acfun.cn/bangumi/aa5022158 的番剧 id 是 5022158，不包括开头的 aa。
+
+:::
+
+### Sankaku Complex
+
+<route name="Post" author="xyqfer" example="/sankakucomplex/post" path="/sankakucomplex/post"/>
 
 ## 图片
 
@@ -863,13 +944,17 @@ GitHub 官方也提供了一些 RSS:
 
 ### 煎蛋
 
-<route name="无聊图" author="Xuanwo" example="/jandan/pic" path="/jandan/:sub_model" :paramsDesc="['煎蛋板块名称']"/>
+<route name="无聊图" author="Xuanwo xyqfer" example="/jandan/pic" path="/jandan/:sub_model" :paramsDesc="['煎蛋板块名称']"/>
+
+| 无聊图 | 无聊图热榜 | 4 小时热榜 |
+| ------ | ---------- | ---------- |
+| pic    | top        | top-4h     |
 
 <route name="妹子图" author="kobemtl xyqfer" example="/jandan/ooxx" path="/jandan/:sub_model" :paramsDesc="['煎蛋板块名称']"/>
 
-| 妹子图 | 热榜     |
-| ------ | -------- |
-| ooxx   | top-ooxx |
+| 妹子图 | 妹子图热榜 |
+| ------ | ---------- |
+| ooxx   | top-ooxx   |
 
 ### 喷嚏
 
@@ -919,6 +1004,11 @@ GitHub 官方也提供了一些 RSS:
 
 <route name="最新图片" author="Chingyat" example="/pigtails" path="/pigtails/index"/>
 
+### Tits Guru
+
+<route name="Home" author="MegrezZhu" example="/tits-guru/home" path="/tits-guru/home"/>
+<route name="Babe of The Day" author="MegrezZhu" example="/tits-guru/daily" path="/tits-guru/daily"/>
+
 ### nHentai
 
 <route name="分类筛选" author="MegrezZhu" example="/nhentai/language/chinese" path="/nhentai/:key/:keyword" :paramsDesc="['筛选条件，可选: parody, character, tag, artist, group, language, category','筛选值']" />
@@ -951,6 +1041,20 @@ GitHub 官方也提供了一些 RSS:
 ### 忧郁的弟弟
 
 <route name="文章" author="DIYgod" example="/mygalgame" path="/mygalgame"/>
+
+### 看漫画
+
+<route name="漫画更新" author="MegrezZhu" path="/manhuagui/comic/:id" example="/manhuagui/comic/22942" :paramsDesc="['漫画ID']">
+
+### Anime1
+
+<route name="動畫" author="maple3142" example="/anime1/anime/2018年秋季/哥布林殺手" path="/anime1/anime/:time/:name" :paramsDesc="['时间', '动画名称']">
+
+时间和动画名称请自己从网址取得: <https://anime1.me/category/2018年秋季/刀劍神域-alicization>
+
+</route>
+
+<route name="搜尋" author="maple3142" example="/anime1/search/兔女郎學姊" path="/anime1/search/:keyword" :paramsDesc="['关键字']"/>
 
 ## 程序更新
 
@@ -1023,6 +1127,10 @@ GitHub 官方也提供了一些 RSS:
 ### xclient.info
 
 <route name="应用更新" author="DIYgod" example="/xclient/app/sketch" path="/xclient/app/:name" :paramsDesc="['应用名, 可在应用页 URL 中找到']"/>
+
+### Typora
+
+<route name="Changelog" author="cnzgray" example="/typora/changelog" path="/typora/changelog"/>
 
 ## 大学通知
 
@@ -1119,6 +1227,14 @@ GitHub 官方也提供了一些 RSS:
 ### 上海交通大学
 
 <route name="电子信息与电气工程学院学术动态" author="HenryQW" example="/sjtu/seiee/academic" path="/universities/sjtu/seiee/academic"/>
+
+<route name="研究生通知公告" author="mzr1996" example="/sjtu/gs/tzgg/pyxx" path="/universities/sjtu/gs/tzgg/:type?" :paramsDesc="['默认列举所有通知公告']">
+
+| 通知公告 | 工作信息 | 招生信息 | 培养信息 | 学位学科 | 国际交流 | 创新工程 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| 空       | gzxx     | xwxx1    | pyxx     | xwxx     | gjjl     | cxgc     |
+
+</route>
 
 ### 中国科学院
 
@@ -1474,13 +1590,17 @@ Category 列表:
 
 ### 纽约时报
 
+<route name="全球纵览" author="HenryQW" example="/nytimes" path="/nytimes/index">
+
 ::: tip 提示
 
-纽约时报 RSS: https://cn.nytimes.com/rss/
+由于众所周知的原因，文章内的图片在中国大陆可能无法正常显示。
 
 :::
 
-<route name="新闻早报" author="yangkghjh" example="/nytimes/morning_post" path="/nytimes/morning_post"/>
+通过提取文章全文，以提供比官方源更佳的阅读体验。
+
+</route>
 
 ### 新京报
 
@@ -1534,7 +1654,7 @@ Category 列表:
 
 ### FT 中文网
 
-<route name="FT 中文网" author="HenryQW" example="/ft/chinese/hotstoryby7day" path="/ft/chinese/:channel?" :paramsDesc="['频道, 缺省为每日更新']">
+<route name="FT 中文网" author="HenryQW xyqfer" example="/ft/chinese/hotstoryby7day" path="/ft/:language/:channel?" :paramsDesc="['语言，简体`chinese`，繁体`traditional`', '频道, 缺省为每日更新']">
 
 ::: tip 提示
 
@@ -1550,6 +1670,20 @@ Category 列表:
 
 -   频道为单一路径, 如 http://www.ftchinese.com/rss/`news` 则为 `/ft/chinese/news`.
 -   频道包含多重路径, 如 http://www.ftchinese.com/rss/`column/007000002` 则替换 `/` 为 `-` `/ft/chinese/column-007000002`.
+
+</route>
+
+### 卫报 The Guardian
+
+<route name="Editorial" author="HenryQW" example="/guardian/editorial" path="/guardian/editorial">
+
+::: tip 提示
+
+由于众所周知的原因，文章内的图片在中国大陆可能无法正常显示。
+
+:::
+
+通过提取文章全文，以提供比官方源更佳的阅读体验。
 
 </route>
 
@@ -1583,6 +1717,10 @@ Solidot 提供的 feed:
 
 </route>
 
+### 极客公园
+
+<route name="全球快讯" author="xyqfer" example="/geekpark/breakingnews" path="/geekpark/breakingnews" />
+
 ## 预报预警
 
 ### 停水通知
@@ -1614,6 +1752,10 @@ Solidot 提供的 feed:
 可通过全局过滤参数订阅您感兴趣的地区.
 
 </route>
+
+### 香港天文台
+
+<route name="Current Weather Report" author="calpa" example="/hko/weather" path="/hko/weather"/>
 
 ## 出行旅游
 
@@ -1798,6 +1940,14 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 
 </route>
 
+### GNN.tw 游戏新闻
+
+<route name="GNN.tw 游戏新闻" author="monner-henster" example="/gnn/gnn" path="/gnn/gnn"/>
+
+### a9vgNews 游戏新闻
+
+<route name="a9vgNews 游戏新闻" author="monner-henster" example="/a9vg/a9vg" path="/a9vg/a9vg"/>
+
 ## 小说·文学·阅读
 
 ### 观止（每日一文）
@@ -1832,6 +1982,10 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 <route name="章节" author="Chingyat" example="/qidian/chapter/1010400217" path="/qidian/chapter/:id" :paramsDesc="['小说 id, 可在对应小说页 URL 中找到']"/>
 
 <route name="讨论区" author="Chingyat" example="/qidian/forum/1010400217" path="/qidian/forum/:id" :paramsDesc="['小说 id, 可在对应小说页 URL 中找到']"/>
+
+### 刺猬猫
+
+<route name="章节" author="Netrvin" example="/ciweimao/chapter/100045750" path="/ciweimao/chapter/:id" :paramsDesc="['小说 id, 可在对应小说页 URL 中找到']"/>
 
 ### 快眼看书
 
@@ -1980,9 +2134,9 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 
 <route name="分类" author="WhiteWorld" example="/readhub/category/topic" path="/readhub/category/:category" :paramsDesc="['分类名']">
 
-| 热门话题 | 科技动态 | 开发者资讯 | 区块链快讯 |
-| -------- | -------- | ---------- | ---------- |
-| topic    | news     | technews   | blockchain |
+| 热门话题 | 科技动态 | 开发者资讯 | 区块链快讯 | 每日早报 |
+| -------- | -------- | ---------- | ---------- | -------- |
+| topic    | news     | technews   | blockchain | daily    |
 
 </route>
 
@@ -2042,6 +2196,8 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 :::
 
 </route>
+
+<route name="Google Doodles" author="xyqfer" example="/google/doodles/zh-CN" path="/google/doodles/:language?" :paramsDesc="['语言，默认为`zh-CN`简体中文，如需其他语言值可从[Google Doodles 官网](https://www.google.com/doodles)获取']" />
 
 ### 果壳网
 
@@ -2147,3 +2303,83 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 1. 复制查询结果 URL 中`?`后的部分，例如 `https://www.autotrader.co.uk/car-search?radius=50&postcode=sw1a1aa&onesearchad=Used&onesearchad=Nearly%20New&onesearchad=New&price-to=9000&year-from=2012&body-type=Hatchback&transmission=Automatic&exclude-writeoff-categories=on` 则为 `radius=50&postcode=sw1a1aa&onesearchad=Used&onesearchad=Nearly%20New&onesearchad=New&price-to=9000&year-from=2012&body-type=Hatchback&transmission=Automatic&exclude-writeoff-categories=on`
 
 </route>
+
+### 联合国
+
+<route name="安理会否决了决议" author="HenryQW" example="/un/scveto" path="/un/scveto"/>
+
+### 百度
+
+<route name="百度趣画" author="xyqfer" example="/baidu/doodles" path="/baidu/doodles"/>
+
+### 搜狗
+
+<route name="搜狗特色LOGO" author="xyqfer" example="/sogou/doodles" path="/sogou/doodles"/>
+
+### IT 桔子
+
+<route name="投融资事件" author="xyqfer" example="/itjuzi/invest" path="/itjuzi/invest"/>
+
+<route name="并购事件" author="xyqfer" example="/itjuzi/merge" path="/itjuzi/merge"/>
+
+### 探物
+
+<route name="产品" author="xyqfer" example="/tanwu/products" path="/tanwu/products"/>
+
+### 下厨房
+
+<route name="用户作品" author="xyqfer" example="/xiachufang/user/cooked/103309404" path="/xiachufang/user/cooked/:id" :paramsDesc="['用户 id, 可在用户主页 URL 中找到']"/>
+
+<route name="用户菜谱" author="xyqfer" example="/xiachufang/user/created/103309404" path="/xiachufang/user/created/:id" :paramsDesc="['用户 id, 可在用户主页 URL 中找到']"/>
+
+<route name="作品动态" author="xyqfer" example="/xiachufang/popular/hot" path="/xiachufang/popular/:timeframe?" :paramsDesc="['默认最新上传']">
+
+| 正在流行 | 24 小时最佳 | 本周最受欢迎 | 新秀菜谱 | 月度最佳   |
+| -------- | ----------- | ------------ | -------- | ---------- |
+| hot      | pop         | week         | rising   | monthhonor |
+
+</route>
+
+### 经济观察网
+
+<route name="经济观察网" author="epirus" example="/eeo/15" path="/eeo/:category" :paramsDesc="['分类']">
+category 对应的关键词有
+
+| 时事 | 政策 | 证券 | 资本 | 理财 | 新科技 | 大健康 | 房产 | 汽车 | 消费 | 影视 | 娱乐 | 体育 | 教育 | 观察家 | 专栏 | 书评 | 个人历史 | 宏观 |
+| ---- | ---- | ---- | ---- | ---- | ------ | ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ------ | ---- | ---- | -------- | ---- |
+| 01   | 02   | 03   | 04   | 05   | 06     | 07     | 08   | 09   | 10   | 11   | 12   | 13   | 14   | 15     | 16   | 17   | 18       | 19   |
+
+</route>
+
+### TSSstatus
+
+<route name="Status" author="xyqfer" example="/tssstatus/j42dap/14W585a" path="/tssstatus/:board/:build" :paramsDesc="['平台 id', '版本 id']">
+
+board 和 build 可在[这里](http://api.ineal.me/tss/status)查看
+
+</route>
+
+### iDownloadBlog
+
+<route name="iDownloadBlog" author="HenryQW" example="/iDownloadBlog" path="/iDownloadBlog/index">
+
+通过提取文章全文, 以提供比官方源更佳的阅读体验.
+
+</route>
+
+### 9To5
+
+<route name="9To5 分站" author="HenryQW" example="/9to5/mac" path="/9to5/:type" :paramsDesc="['分站名字']">
+
+支持分站：
+| Mac | Google | Toys |
+| --- | ------ | ---- |
+| Mac | Google | Toys |
+
+</route>
+
+### 刷屏
+
+<route name="最新" author="xyqfer" example="/weseepro/newest" path="/weseepro/newest"/>
+
+<route name="朋友圈" author="xyqfer" example="/weseepro/circle" path="/weseepro/circle"/>

@@ -20,8 +20,43 @@ module.exports = function(options = {}) {
     });
 
     options.app.context.cache = {
-        get: (key) => memoryCache.get(key),
-        set: (key, value, maxAge) => memoryCache.set(key, value, maxAge * 1000),
+        get: (key) => {
+            if (key) {
+                return memoryCache.get(key);
+            }
+        },
+        set: (key, value, maxAge) => {
+            if (!value) {
+                value = '';
+            }
+            if (typeof value === 'object') {
+                value = JSON.stringify(value);
+            }
+            if (key) {
+                memoryCache.set(key, value, maxAge * 1000);
+            }
+        },
+
+        /**
+         *
+         * try get from cache.
+         * if not exists use `getValue` function to get value, and put into cahche.
+         *
+         * @param key cache key
+         * @param getValueFunc a function to get value. call it when key not exists.
+         * @param maxAge
+         *
+         * @returns {Promise<void>}
+         */
+        tryGet: async function(key, getValueFunc, maxAge) {
+            let v = await this.get(key);
+            if (!v) {
+                v = await getValueFunc();
+                this.set(key, v, maxAge);
+            }
+
+            return v;
+        },
     };
 
     return async function cache(ctx, next) {
