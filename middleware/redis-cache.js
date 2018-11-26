@@ -47,7 +47,7 @@ module.exports = function(options = {}) {
             }
         },
         set: async (key, value, maxAge) => {
-            if (!value) {
+            if (!value || value === 'undefined') {
                 value = '';
             }
             if (typeof value === 'object') {
@@ -56,27 +56,6 @@ module.exports = function(options = {}) {
             if (key) {
                 await redisClient.setex(key, maxAge, value);
             }
-        },
-
-        /**
-         *
-         * try get from cache.
-         * if not exists use `getValue` function to get value, and put into cahche.
-         *
-         * @param key cache key
-         * @param getValueFunc a function to get value. call it when key not exists.
-         * @param maxAge
-         *
-         * @returns {Promise<void>}
-         */
-        tryGet: async function(key, getValueFunc, maxAge) {
-            let v = await this.get(key);
-            if (!v) {
-                v = await getValueFunc();
-                this.set(key, v, maxAge);
-            }
-
-            return v;
         },
     };
 

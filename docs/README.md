@@ -19,8 +19,8 @@ RSSHub 是一个轻量、易于扩展的 RSS 生成器, 可以给任何奇奇怪
 
 ### Special Sponsors
 
-| <a href="https://rixcloud.app/rsshub" target="_blank"><img width="240px" src="https://i.imgur.com/qRP0eMg.png"></a> | <a href="https://werss.app?utm_source=rsshub" target="_blank"><img width="170px" src="https://cdn.weapp.design/werss/werss-logo.png"></a> | <a href="https://j.youzan.com/ccPcrY" target="_blank"><img width="180px" src="https://i.imgur.com/FZtFAGz.png"></a> |
-| :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+| <a href="https://rixcloud.app/rsshub" target="_blank"><img width="240px" src="https://i.imgur.com/qRP0eMg.png"></a> | <a href="https://werss.app?utm_source=rsshub" target="_blank"><img width="170px" src="https://cdn.weapp.design/werss/werss-logo.png"></a> |
+| :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
 
 
 ### Sponsors
@@ -165,7 +165,7 @@ RSSHub 提供下列 API 接口:
 
 ### bilibili
 
-<route name="番剧" author="DIYgod" example="/bilibili/bangumi/21680" path="/bilibili/:seasonid" :paramsDesc="['番剧 id, 番剧主页打开控制台执行 `window.__INITIAL_STATE__.ssId` 或 `window.__INITIAL_STATE__.mediaInfo.param.season_id` 获取']"/>
+<route name="番剧" author="DIYgod" example="/bilibili/bangumi/21680" path="/bilibili/bangumi/:seasonid" :paramsDesc="['番剧 id, 番剧主页打开控制台执行 `window.__INITIAL_STATE__.ssId` 或 `window.__INITIAL_STATE__.mediaInfo.param.season_id` 获取']"/>
 
 <route name="UP 主投稿" author="DIYgod" example="/bilibili/user/video/2267573" path="/bilibili/user/video/:uid" :paramsDesc="['用户 id, 可在 UP 主主页中找到']"/>
 
@@ -445,6 +445,8 @@ RSSHub 提供下列 API 接口:
 
 </route>
 
+<route name="关键词" author="DIYgod" example="/pixiv/search/麻衣/popular" path="/pixiv/search/:keyword/:order?" :paramsDesc="['关键词', '排序方式，popular 按热门度排序，空或其他任意值按时间排序']"/>
+
 ### 豆瓣
 
 <route name="正在上映的电影" author="DIYgod" example="/douban/movie/playing" path="/douban/movie/playing"/>
@@ -556,6 +558,10 @@ RSSHub 提供下列 API 接口:
 | (空) | week | month | year |
 
 </route>
+
+### NGA
+
+<route name="分区帖子" author="xyqfer" example="/nga/forum/485" path="/nga/forum/:fid"  :paramsDesc="['分区 id, 可在分区主页 URL 找到']"/>
 
 ## 编程
 
@@ -855,7 +861,7 @@ GitHub 官方也提供了一些 RSS:
 
 <route name="分区帖子" author="zhboner" example="/t66y/20/2" path="/t66y/:id/:type?" :paramsDesc="['分区 id, 可在分区页 URL 中找到', '类型 id, 可在分区类型过滤后的 URL 中找到']">
 
-> 注意：并非所欲的分区都有子类型，可以参考成人文学交流区的[古典武侠]这一子类型。
+> 注意：并非所有的分区都有子类型，可以参考成人文学交流区的[古典武侠]这一子类型。
 
 | 亚洲无码原创区 | 亚洲有码原创区 | 欧美原创区 | 动漫原创区 | 国产原创区 |
 | -------------- | -------------- | ---------- | ---------- | ---------- |
@@ -942,6 +948,16 @@ GitHub 官方也提供了一些 RSS:
 
 <route name="详情" author="gee1k xyqfer" example="/mzitu/post/129452" path="/mzitu/post/:id" :paramsDesc="['详情 id, 可在详情页 URL 中找到']"/>
 
+### 豆瓣美女
+
+<route name="分类" author="kba977" example="/dbmv" path="/dbmv/:category?" :paramsDesc="['分类 id - 若不填该参数, 默认所有']">
+
+| 大胸妹 | 小翘臀 | 黑丝袜 | 美腿控 | 有颜值 | 大杂烩 |
+| ------ | ------ | ------ | ------ | ------ | ------ |
+| 2      | 6      | 7      | 3      | 4      | 5      |
+
+</route>
+
 ### 煎蛋
 
 <route name="无聊图" author="Xuanwo xyqfer" example="/jandan/pic" path="/jandan/:sub_model" :paramsDesc="['煎蛋板块名称']"/>
@@ -1007,12 +1023,14 @@ GitHub 官方也提供了一些 RSS:
 ### Tits Guru
 
 <route name="Home" author="MegrezZhu" example="/tits-guru/home" path="/tits-guru/home"/>
-<route name="Babe of The Day" author="MegrezZhu" example="/tits-guru/daily" path="/tits-guru/daily"/>
+<route name="Daily Best" author="MegrezZhu" example="/tits-guru/daily" path="/tits-guru/daily"/>
+<route name="Models" author="MegrezZhu" example="/tits-guru/model/mila-azul" path="/tits-guru/model/:name" :paramsDesc="['指定模特名字，详见[这里](https://tits-guru.com/models)']"/>
+<route name="Categories" author="MegrezZhu" example="/tits-guru/category/bikini" path="/tits-guru/category/:type" :paramsDesc="['指定类别，详见[这里](https://tits-guru.com/categories)']"/>
 
 ### nHentai
 
-<route name="分类筛选" author="MegrezZhu" example="/nhentai/language/chinese" path="/nhentai/:key/:keyword" :paramsDesc="['筛选条件，可选: parody, character, tag, artist, group, language, category','筛选值']" />
-<route name="高级搜索" author="MegrezZhu" example="/nhentai/search/language%3Ajapanese+-scat+-yaoi+-guro+-%22mosaic+censorship%22" path="/nhentai/search/:keyword" :paramsDesc="['用于搜索的关键词。可在原网站搜索后复制 q= 后面的内容，也可直接输入，但空格等特殊符号是否会转换取决于浏览器和阅读器的实现。用法详见[官网](https://nhentai.net/info/)']" />
+<route name="分类筛选" author="MegrezZhu" example="/nhentai/language/chinese" path="/nhentai/:key/:keyword/:mode?" :paramsDesc="['筛选条件，可选: parody, character, tag, artist, group, language, category','筛选值', '模式，`simple`为仅封面，`detail`会包括本子每一页，但对服务器负载大。默认为`simple`']" />
+<route name="高级搜索" author="MegrezZhu" example="/nhentai/search/language%3Ajapanese+-scat+-yaoi+-guro+-%22mosaic+censorship%22" path="/nhentai/search/:keyword/:mode?" :paramsDesc="['用于搜索的关键词。可在原网站搜索后复制 q= 后面的内容，也可直接输入，但空格等特殊符号是否会转换取决于浏览器和阅读器的实现。用法详见[官网](https://nhentai.net/info/)', '模式，`simple`为仅封面，`detail`会包括本子每一页，但对服务器负载大。默认为`simple`']" />
 
 ## 二次元
 
@@ -1055,6 +1073,12 @@ GitHub 官方也提供了一些 RSS:
 </route>
 
 <route name="搜尋" author="maple3142" example="/anime1/search/兔女郎學姊" path="/anime1/search/:keyword" :paramsDesc="['关键字']"/>
+
+### 動畫瘋
+
+<route name="最後更新" author="maple3142" example="/anigamer/new_anime" path="/anigamer/new_anime"/>
+
+<route name="動畫" author="maple3142" example="/anigamer/anime/90003" path="/anigamer/anime/:sn" :paramsDesc="['動畫 sn']"/>
 
 ## 程序更新
 
@@ -1131,6 +1155,10 @@ GitHub 官方也提供了一些 RSS:
 ### Typora
 
 <route name="Changelog" author="cnzgray" example="/typora/changelog" path="/typora/changelog"/>
+
+### Apkpure
+
+<route name="Versions" author="maple3142" example="/apkpure/versions/jp/jp.co.craftegg.band" path="/apkpure/versions/:region/:pkg" :paramsDesc="['區域代號', 'package name']">
 
 ## 大学通知
 
@@ -1394,13 +1422,21 @@ category 列表：
 
 ### 四川旅游学院
 
-<route name="信息与工程学院动态公告" author="talenHuang" example="/sctu/xgxy" path="/universities/sctu/xgxy"/>
+<route name="信息与工程学院动态公告列表" author="talenHuang" example="/sctu/xgxy" path="/universities/sctu/information-engineer-faculty/index">
 
-<route name="教务处" author="talenHuang" example="/sctu/jwc/13" path="/universities/sctu/jwc:type?" :paramsDesc="['可选参数, 默认为 `13`']">
+</route>
+
+<route name="信息与工程学院公告详情" author="talenHuang" example="/sctu/xgxy/652" path="/universities/sctu/information-engineer-faculty/context/:id" :paramsDesc="['文章id']">
+
+</route>
+
+<route name="教务处" author="talenHuang" example="/sctu/jwc/13" path="/universities/sctu/jwc/index:type?" :paramsDesc="['可选参数, 默认为 `13`']">
 
 | 教务通知 | 信息公告 |
 | -------- | -------- |
 | 13       | 14       |
+
+<route name="教务处通告详情" author="talenHuang" example="/sctu/jwc/13/645" path="/universities/sctu/jwc/context/:type/:id" :paramsDesc="['通知类型','文章id']">
 
 </route>
 
@@ -1537,6 +1573,20 @@ category 列表：
 注意: `qttz` 与 `xwdt` 在原网站等价.
 
  </route>
+
+### 华南理工大学
+
+<route name="教务处新闻动态" author="KeNorizon" example="/scut/jwc/1" path="/scut/jwc/:category?" :paramsDesc="['新闻动态分类, 可选, 默认为 `1`']">
+
+| 教务通知 | 交流交换 | 新闻动态 | 媒体关注 | 学院通知 |
+| -------- | -------- | -------- | -------- | -------- |
+| 1        | 2        | 3        | 4        | 5        |
+
+</route>
+
+### 中山大学
+
+<route name="数据科学与计算机学院动态" author="MegrezZhu" example="/sysu/sdcs" path="/sysu/sdcs" />
 
 ## 传统媒体
 
@@ -1890,6 +1940,10 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 
 <route name="新品" author="xyqfer" example="/westore/new" path="/westore/new"/>
 
+### 玩物志
+
+<route name="最新" author="xyqfer" example="/coolbuy/newest" path="/coolbuy/newest"/>
+
 ## 游戏资讯
 
 ### 3DMGame
@@ -2112,7 +2166,7 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 
 ### 快递
 
-<route name="快递" author="DIYgod" example="/express/youzhengguoji/CV054432809US" path="/express/:company/:number" :paramsDesc="['快递单号', '快递公司代码, 参考 [API URL 所支持的快递公司及参数说明](https://www.kuaidi100.com/download/api_kuaidi100_com%2820140729%29.doc)']">
+<route name="快递" author="DIYgod" example="/express/youzhengguoji/CV054432809US" path="/express/:company/:number" :paramsDesc="['快递公司代码, 参考 [API URL 所支持的快递公司及参数说明](https://www.kuaidi100.com/download/api_kuaidi100_com%2820140729%29.doc)', '快递单号']">
 
 ::: warning 注意
 
@@ -2342,7 +2396,7 @@ IATA 国际航空运输协会机场代码, 参见[维基百科 国际航空运�
 
 ### 经济观察网
 
-<route name="经济观察网" author="epirus" example="/eeo/15" path="/eeo/:category" :paramsDesc="['分类']">
+<route name="分类资讯" author="epirus" example="/eeo/15" path="/eeo/:category" :paramsDesc="['分类']">
 category 对应的关键词有
 
 | 时事 | 政策 | 证券 | 资本 | 理财 | 新科技 | 大健康 | 房产 | 汽车 | 消费 | 影视 | 娱乐 | 体育 | 教育 | 观察家 | 专栏 | 书评 | 个人历史 | 宏观 |
@@ -2351,7 +2405,7 @@ category 对应的关键词有
 
 </route>
 
-### TSSstatus
+### TSSstatus（iOS 降级通道）
 
 <route name="Status" author="xyqfer" example="/tssstatus/j42dap/14W585a" path="/tssstatus/:board/:build" :paramsDesc="['平台 id', '版本 id']">
 
@@ -2361,7 +2415,7 @@ board 和 build 可在[这里](http://api.ineal.me/tss/status)查看
 
 ### iDownloadBlog
 
-<route name="iDownloadBlog" author="HenryQW" example="/iDownloadBlog" path="/iDownloadBlog/index">
+<route name="blog" author="HenryQW" example="/iDownloadBlog" path="/iDownloadBlog/index">
 
 通过提取文章全文, 以提供比官方源更佳的阅读体验.
 
@@ -2383,3 +2437,23 @@ board 和 build 可在[这里](http://api.ineal.me/tss/status)查看
 <route name="最新" author="xyqfer" example="/weseepro/newest" path="/weseepro/newest"/>
 
 <route name="朋友圈" author="xyqfer" example="/weseepro/circle" path="/weseepro/circle"/>
+
+### JavBus
+
+<route name="首页" author="MegrezZhu" example="/javbus/home" path="/javbus/home" />
+
+<route name="分类" author="MegrezZhu" example="/javbus/genre/7g" path="/javbus/genre/:gid" :paramsDesc="['分类id，详见[网站里](https://www.javbus.com/genre)的链接']" />
+
+<route name="演员" author="MegrezZhu" example="/javbus/star/2jv" path="/javbus/star/:sid" :paramsDesc="['演员id，详见[网站里](https://www.javbus.com/actresses)的链接']" />
+
+<route name="首页/步兵" author="MegrezZhu" example="/javbus/uncensored/home" path="/javbus/uncensored/home" />
+
+<route name="分类/步兵" author="MegrezZhu" example="/javbus/uncensored/genre/1bc" path="/javbus/uncensored/genre/:gid" :paramsDesc="['分类id，详见[网站里](https://www.javbus.com/uncensored/genre)的链接']" />
+
+<route name="演员/步兵" author="MegrezZhu" example="/javbus/uncensored/star/b5b" path="/javbus/uncensored/star/:sid" :paramsDesc="['演员id，详见[网站里](https://www.javbus.com/uncensored/actresses)的链接']" />
+
+<route name="首页/欧陆风云" author="MegrezZhu" example="/javbus/western/home" path="/javbus/western/home" />
+
+<route name="分类/欧陆风云" author="MegrezZhu" example="/javbus/western/genre/86" path="/javbus/western/genre/:gid" :paramsDesc="['分类id，详见[网站里](https://www.javbus.work/genre)的链接']" />
+
+<route name="演员/欧陆风云" author="MegrezZhu" example="/javbus/western/star/4hv" path="/javbus/western/star/:sid" :paramsDesc="['演员id，详见[网站里](https://www.javbus.work/actresses)的链接']" />

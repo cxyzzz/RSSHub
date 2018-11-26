@@ -3,8 +3,13 @@ const path = require('path');
 const config = require('../config');
 const he = require('he');
 const typeRegrx = /\.(atom|rss)$/;
+const unsupportedRegrx = /\.json$/;
 
 module.exports = async (ctx, next) => {
+    if (ctx.request.path.match(unsupportedRegrx)) {
+        throw Error('<b>JSON output had been removed, see: <a href="https://github.com/DIYgod/RSSHub/issues/1114">https://github.com/DIYgod/RSSHub/issues/1114</a></b>');
+    }
+
     ctx.state.type = ctx.request.path.match(typeRegrx) || ['', ''];
     ctx.request.path = ctx.request.path.replace(typeRegrx, '');
 
@@ -37,6 +42,11 @@ module.exports = async (ctx, next) => {
                                 break;
                             }
                         }
+                    }
+
+                    if (item.enclosure_length) {
+                        const itunes_duration = Math.floor(item.enclosure_length / 3600) + ':' + Math.floor((item.enclosure_length % 3600) / 60) + ':' + (((item.enclosure_length % 3600) % 60) / 100).toFixed(2).slice(-2);
+                        item.itunes_duration = itunes_duration;
                     }
                 });
 
