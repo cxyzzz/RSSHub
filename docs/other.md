@@ -155,6 +155,11 @@
 
 <Route name="专栏" author="LogicJake" example="/sspai/column/104" path="/sspai/column/:id"  :paramsDesc="['专栏 id']"/>
 
+## 异次元软件世界
+
+<Route name="首页" author="kimi360" example="/iplay/home" path="/iplay/home">
+</Route>
+
 ## 趣头条
 
 <Route name="分类" author="alphardex LogicJake" example="/qutoutiao/category/1" path="/qutoutiao/category/:cid" :paramsDesc="['分类 id']">
@@ -468,34 +473,51 @@ type 为 all 时，category 参数不支持 cost 和 free
 
 <Route name="话题" author="brilon" example="/infoq/topic/1" path="/infoq/topic/:id" :paramsDesc="['话题id，可在[InfoQ全部话题](https://www.infoq.cn/topics)页面找到URL里的话题id']" />
 
-### 艾瑞
+## 艾瑞
 
 <route name="产业研究报告" author="brilon" example="/iresearch/report" path="/iresearch/report"/>
 
-### ZAKER
+## ZAKER
 
 <Route name="source" author="LogicJake" example="/zaker/source/12291" path="/zaker/source/:id" :paramsDesc="['source id，可在 URL 中找到']"/>
 
-### MobData
+## MobData
 
 <route name="分析报告" author="brilon" example="/mobdata/report" path="/mobdata/report"/>
 
-### 腾讯谷雨
+## 腾讯谷雨
 
 <Route name="栏目" author="LogicJake" example="/tencent/guyu/channel/lab" path="/tencent/guyu/channel/:name" :paramsDesc="['栏目名称，包括lab，report，story，shalong']"/>
 
-### checkee.info
+## checkee.info
 
 <Route name="美国签证 check 动态" author="lalxyy" example="/checkee/2019-03" path="/checkee/:month" :paramsDesc="['签证被 check 的年份-月份，如 2019-03']" />
 
-### 古诗文网
+## 古诗文网
 
 <Route name="首页推荐" author="LogicJake" example="/gushiwen/recommend" path="/gushiwen/recommend"/>
 
-### 电商在线
+## 电商在线
 
 <Route name="电商在线" author="LogicJake" example="/imaijia/category/xls" path="/imaijia/category/:category" :paramsDesc="['类别id，可在 URL 中找到']" />
 
-### 马良行
+## 马良行
 
 <Route name="马良行" author="junfengP" example="/mlhang" path="/mlhang" />
+
+## 世界卫生组织
+
+<Route name="媒体中心" author="LogicJake" example="/who/news-room/feature-stories" path="/who/news-room/:type" :paramsDesc="['类别，可在 URL 中找到']"/>
+
+## 福利资源-met.red
+
+<Route name="福利资源-met.red" author="junfengP" example="/metred/fuli" path="/metred/fuli" />
+
+## 毕马威
+
+<Route name="洞察" author="LogicJake" example="/kpmg/insights" path="/kpmg/insights" />
+
+## gradCafe(一个比较流行的国外研究生录取结果通知)
+
+<Route name="gradCafe result" author="liecn" example="/gradcafe/result" path="/gradcafe/result" />
+<Route name="gradCafe result by key words" author="liecn" example="/gradcafe/result/computer" path="/gradcafe/result/:type" :paramsDesc="['按关键词进行搜索，如 computer']/>
