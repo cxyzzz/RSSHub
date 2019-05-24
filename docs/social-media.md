@@ -348,15 +348,15 @@ pageClass: routes
 
 ## Twitter
 
-### 用户
+### 用户时间线
 
 <Route author="DIYgod" example="/twitter/user/DIYgod" path="/twitter/user/:id" :paramsDesc="['用户 twitter 名']"/>
 
-### 列表
+### 列表时间线
 
 <Route author="xyqfer" example="/twitter/list/ladyleet/javascript" path="/twitter/list/:id/:name" :paramsDesc="['用户 twitter 名', 'list 名称']"/>
 
-### Likes
+### 用户喜欢列表
 
 <Route author="xyqfer" example="/twitter/likes/DIYgod" path="/twitter/likes/:id" :paramsDesc="['用户 twitter 名']"/>
 
@@ -645,6 +645,16 @@ pageClass: routes
 ### 公众号（传送门来源）
 
 <Route author="HenryQW" example="/wechat/csm/huxiu_com" path="/wechat/csm/:id" :paramsDesc="['公众号 id, 打开公众号页, 在 URL 中找到 id']"/>
+
+### 公众号（Telegrame 频道来源）
+
+<Route author="LogicJake" example="/wechat/tgchannel/lifeweek" path="/wechat/tgchannel/:id" :paramsDesc="['公众号绑定频道 id']">
+
+::: warning 注意
+
+该方法需要通过 efb 进行频道绑定，具体操作见[https://github.com/DIYgod/RSSHub/issues/2172](https://github.com/DIYgod/RSSHub/issues/2172)
+:::
+</Route>
 
 ### 公众平台系统公告栏目
 
