@@ -39,6 +39,12 @@ pageClass: routes
 
 见 [#app-store-mac-app-store](/program-update.html#app-store-mac-app-store)
 
+## archdaily
+
+### 首页
+
+<Route author="kt286" example="/archdaily" path="/archdaily"/>
+
 ## AutoTrader
 
 ### 搜索结果
@@ -90,6 +96,14 @@ pageClass: routes
 
 1. 简单模式, 例如「data visualization」, <https://rsshub.app/google/scholar/data+visualization>.
 2. 高级模式, 前往 [Google Scholar](https://scholar.google.com/schhp?hl=zh-cn&as_sdt=0,5), 点击左上角, 选择高级搜索并提交查询. 此时 URL 应为: <https://scholar.google.com/scholar?as_q=data+visualization&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=2018&as_yhi=&hl=zh-CN&as_sdt=0%2C5>, 复制`https://scholar.google.com/scholar?`后的所有语句作为本路由的查询参数. 例子所对应的完整路由为<https://rsshub.app/google/scholar/as_q=data+visualization&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=2018&as_yhi=&hl=zh-CN&as_sdt=0%2C5>.
+
+</Route>
+
+### 谷歌学术作者引用更新
+
+<Route author="KellyHwong" example="/google/citations/mlmE4JMAAAAJ" path="/google/citations/:id" crawlerBadge="1">
+
+路由中的参数 id，即用户谷歌学术引用页面 url 中的 id，如 https://scholar.google.com/citations?hl=zh-CN&user=mlmE4JMAAAAJ 中 user= 后的 mlmE4JMAAAAJ。
 
 </Route>
 
@@ -164,6 +178,12 @@ pageClass: routes
 ### 分析报告
 
 <Route author="brilon" example="/mobdata/report" path="/mobdata/report"/>
+
+## NBA
+
+### 头条新闻
+
+<Route author="alizeegod" example="/nba/app_news" path="/nba/app_news"/>
 
 ## ONE · 一个
 
@@ -249,6 +269,10 @@ type 为 all 时，category 参数不支持 cost 和 free
 ### source
 
 <Route author="LogicJake" example="/zaker/source/12291" path="/zaker/source/:id" :paramsDesc="['source id，可在 URL 中找到']"/>
+
+### channel
+
+<Route author="kt286" example="/zaker/channel/13" path="/zaker/source/:id" :paramsDesc="['channel id，可在 URL 中找到']"/>
 
 ## 爱范儿 ifanr
 
@@ -798,6 +822,20 @@ type 为 all 时，category 参数不支持 cost 和 free
 ### 吐槽新帖
 
 <Route author="Qixingchen" example="/tucaoqq/post/28564/CdRI0728" path="/tucaoqq/post/:project/:key" :paramsDesc="['产品 ID', '产品密钥']"/>
+
+## 天津产权交易中心
+
+### 产权转让
+
+<Route author="kt286" example="/tprtc/cqzr" path="/tprtc/cqzr"/>
+
+### 企业资产转让
+
+<Route author="kt286" example="/tprtc/qyzc" path="/tprtc/qyzc"/>
+
+### 新闻动态
+
+<Route author="kt286" example="/tprtc/news" path="/tprtc/news"/>
 
 ## 推酷
 
