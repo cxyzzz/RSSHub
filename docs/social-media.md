@@ -354,7 +354,7 @@ pageClass: routes
 
 ### 瞬间更新
 
-<Route author="ImSingee" example="/soul/Y2w2aTNWQVBLOU09" path="/soul:id" :paramsDesc="['用户 id, 分享用户主页时的 URL 的 userIdEcpt 参数']"></Route>
+<Route author="ImSingee" example="/soul/Y2w2aTNWQVBLOU09" path="/soul:id" :paramsDesc="['用户 id, 分享用户主页时的 URL 的 userIdEcpt 参数']" radar="1"></Route>
 
 ## Telegram
 
@@ -560,34 +560,6 @@ pageClass: routes
 
 <Route author="LogicJake" example="/hupu/bbs/bxj/2" path="/hupu/bbs/:id/:order?" :paramsDesc="['板块 id，可在板块 URL 找到', '排序方式，1最新回帖（默认），2最新发帖，3精华帖']"/>
 
-## 即刻
-
-### 圈子-精选
-
-<Route author="DIYgod" example="/jike/topic/54dffb40e4b0f57466e675f0" path="/jike/topic/:id" :paramsDesc="['圈子 id, 可在即刻 web 端圈子页或 APP 分享出来的圈子页 URL 中找到']" anticrawler="1"/>
-
-::: tip 提示
-
-部分圈子如 `一觉醒来发生了什么: 553870e8e4b0cafb0a1bef68` 提供纯文字内容, <a href="#/jike/topic/text/:id">圈子-纯文字 /jike/topic/text/:id</a> 可能会提供更好的体验.
-
-:::
-
-### 圈子-广场
-
-<Route author="DIYgod" example="/jike/topic/square/54dffb40e4b0f57466e675f0" path="/jike/topic/square/:id" :paramsDesc="['圈子 id, 可在即刻 web 端圈子页或 APP 分享出来的圈子页 URL 中找到']" anticrawler="1"/>
-
-### 圈子-纯文字
-
-<Route author="HenryQW" example="/jike/topic/text/553870e8e4b0cafb0a1bef68" path="/jike/topic/text/:id" :paramsDesc="['圈子 id, 可在即刻 web 端圈子页或 APP 分享出来的圈子页 URL 中找到']" anticrawler="1"/>
-
-### 用户动态
-
-<Route author="DIYgod" example="/jike/user/82D23B32-CF36-4C59-AD6F-D05E3552CBF3" path="/jike/user/:id" :paramsDesc="['用户 id, 可在即刻 web 端用户页 URL 中找到']" anticrawler="1"/>
-
-### 即刻小报
-
-<Route author="Andiedie" example="/jike/daily" path="/jike/daily" anticrawler="1"/>
-
 ## 简书
 
 ### 首页
@@ -674,17 +646,13 @@ pageClass: routes
 
 ::: tip 提示
 
-公众号直接抓取困难, 故目前提供即刻和瓦斯两种间接抓取方案, 请自行选择
+公众号直接抓取困难, 故目前提供几种间接抓取方案, 请自行选择
 
 :::
 
-### 公众号（即刻来源）
-
-<Route author="DIYgod" example="/jike/topic/584b8ac671a288001154a115" path="/jike/topic/:id" :paramsDesc="['参考 [即刻-圈子-精选](#/jike/topic/:id)']" anticrawler="1"/>
-
 ### 公众号（ wemp.app 来源）
 
-<Route author="HenryQW" example="/wechat/wemp/36836fbe-bdec-4758-8967-7cc82722952d" path="/wechat/wemp/:id" :paramsDesc="['wemp 公众号 id, 可在搜索引擎使用 `site:wemp.app` 搜索公众号（例如: 人民日报 site:wemp.app), 打开公众号页, 在 URL 中找到 id']"/>
+<Route author="HenryQW" example="/wechat/wemp/36836fbe-bdec-4758-8967-7cc82722952d" path="/wechat/wemp/:id" :paramsDesc="['wemp 公众号 id, 可在搜索引擎使用 `site:wemp.app` 搜索公众号（例如: 人民日报 site:wemp.app), 打开公众号页, 在 URL 中找到 id']" anticrawler="1"/>
 
 ### 公众号（传送门来源）
 
