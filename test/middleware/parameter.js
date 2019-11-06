@@ -1,8 +1,9 @@
 const supertest = require('supertest');
-const { server } = require('../../lib/index');
+const server = require('../../lib/index');
 const request = supertest(server);
 const Parser = require('rss-parser');
 const parser = new Parser();
+const config = require('../../lib/config').value;
 
 afterAll(() => {
     server.close();
@@ -40,7 +41,7 @@ describe('filter', () => {
     });
 
     it(`filter_time`, async () => {
-        const response = await request.get('/test/1?filter_time=25');
+        const response = await request.get('/test/current_time?filter_time=25');
         const parsed = await parser.parseString(response.text);
         expect(parsed.items.length).toBe(2);
         expect(parsed.items[0].title).toBe('Title1');
@@ -132,6 +133,7 @@ describe('wrong_path', () => {
     it(`wrong_path`, async () => {
         const response = await request.get('/wrong');
         expect(response.status).toBe(404);
+        expect(response.headers['cache-control']).toBe(`public, max-age=${config.cache.routeExpire * 100}`);
         expect(response.text).toMatch(/Error: wrong path/);
     });
 });
@@ -150,19 +152,39 @@ describe('complicated_description', () => {
         const response = await request.get('/test/complicated');
         expect(response.status).toBe(200);
         const parsed = await parser.parseString(response.text);
-        expect(parsed.items[0].content).toBe(`<a href="http://mock.com/DIYgod/RSSHub"></a>
-<img src="http://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">
+        expect(parsed.items[0].content).toBe(`<a href="https://mock.com/DIYgod/RSSHub"></a>
+<img src="https://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">
 
 <a href="http://mock.com/DIYgod/RSSHub"></a>
-<img src="http://mock.com/DIYgod/RSSHub.jpg" data-src="/DIYgod/RSSHub0.jpg" referrerpolicy="no-referrer">
-<img data-src="/DIYgod/RSSHub.jpg" src="http://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">
-<img data-mock="/DIYgod/RSSHub.png" src="http://mock.com/DIYgod/RSSHub.png" referrerpolicy="no-referrer">
-<img mock="/DIYgod/RSSHub.gif" src="http://mock.com/DIYgod/RSSHub.gif" referrerpolicy="no-referrer">
+<img src="https://mock.com/DIYgod/RSSHub.jpg" data-src="/DIYgod/RSSHub0.jpg" referrerpolicy="no-referrer">
+<img data-src="/DIYgod/RSSHub.jpg" src="https://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">
+<img data-mock="/DIYgod/RSSHub.png" src="https://mock.com/DIYgod/RSSHub.png" referrerpolicy="no-referrer">
+<img mock="/DIYgod/RSSHub.gif" src="https://mock.com/DIYgod/RSSHub.gif" referrerpolicy="no-referrer">
 <img src="http://mock.com/DIYgod/DIYgod/RSSHub" referrerpolicy="no-referrer">
-<img src="http://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">`);
-        expect(parsed.items[1].content).toBe(`<a href="http://mock.com/DIYgod/RSSHub"></a>
-<img src="http://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">`);
-        expect(parsed.items[2].content).toBe(`<a href="https://mock.com/DIYgod/RSSHub"></a>
 <img src="https://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">`);
+        expect(parsed.items[1].content).toBe(`<a href="https://mock.com/DIYgod/RSSHub"></a>
+<img src="https://mock.com/DIYgod/RSSHub.jpg" referrerpolicy="no-referrer">`);
+    });
+});
+
+describe('sort', () => {
+    it(`sort`, async () => {
+        const response = await request.get('/test/sort');
+        expect(response.status).toBe(200);
+        const parsed = await parser.parseString(response.text);
+        expect(parsed.items[0].title).toBe('Sort Title 3');
+        expect(parsed.items[parsed.items.length - 3].title).toBe('Sort Title 2');
+        expect(parsed.items[parsed.items.length - 2].title).toBe('Sort Title 0');
+        expect(parsed.items[parsed.items.length - 1].title).toBe('Sort Title 1');
+    });
+});
+
+describe('mess parameter', () => {
+    it(`date`, async () => {
+        const response = await request.get('/test/mess');
+        expect(response.status).toBe(200);
+        const parsed = await parser.parseString(response.text);
+        expect(parsed.items[0].pubDate).toBe('Mon, 31 Dec 2018 16:00:00 GMT');
+        expect(parsed.items[0].link).toBe('https://github.com/DIYgod/RSSHub/issues/0');
     });
 });

@@ -10,12 +10,6 @@ pageClass: routes
 
 <Route author="HenryQW" example="/allpoetry/newest" path="/allpoetry/:order?" :paramsDesc="['排序方式, `best` 或 `newest`, 缺省 `best`']"/>
 
-## Nautilus
-
-### 话题
-
-<Route author="emdoe" example="/nautilus/topic/Art" path="/nautilus/topic/:tid" :paramsDesc="['话题 id, 可在页面上方 TOPICS 栏目处找到']"/>
-
 ## UU 看书
 
 ### 小说更新
@@ -50,6 +44,18 @@ pageClass: routes
 
 :::
 
+</Route>
+
+## 吹牛部落
+
+### 栏目
+
+<Route author="LogicJake" example="/chuiniu/column/0b1c4cf6e7f24e8da11e37882de73704" path="/chuiniu/column/:id" :paramsDesc="['栏目 id, 可在对应栏目页 URL 中找到']">
+
+::: warning 注意
+
+正文内容需要用户登录后的 x-member 值，详情见部署页面的配置模块。若无相关配置或 x-member 失效，则只显示文章摘要。
+:::
 </Route>
 
 ## 刺猬猫

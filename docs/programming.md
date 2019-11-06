@@ -154,6 +154,17 @@ GitHub 官方也提供了一些 RSS:
 
 </Route>
 
+## kaggle
+
+### Discussion
+
+<Route author="LogicJake" example="/kaggle/discussion/387811/active" path="/kaggle/discussion/:forumId/:sort?" :paramsDesc="['讨论区 id, 打开网页请求, 搜索 forumId', '排序方式见下表, 默认为 hot']">
+
+| hot     | recent          | new             | top        | active        |
+| ------- | --------------- | --------------- | ---------- | ------------- |
+| Hotness | Recent Comments | Recently Posted | Most Votes | Most Comments |
+
+</Route>
 ## LeetCode
 
 ### 文章
@@ -460,6 +471,12 @@ GitHub 官方也提供了一些 RSS:
 
 </Route>
 
+## 码农周刊
+
+### issues
+
+<Route author="tonghs" example="/manong-weekly" path="/manong-weekly" />
+
 ## 前端艺术家&&飞冰早报
 
 ### 列表
@@ -515,6 +532,26 @@ GitHub 官方也提供了一些 RSS:
 ### 微信开放社区-微信支付公告
 
 <Route author="phantomk" example="/wechat-open/community/pay-announce" path="/wechat-open/community/pay-announce"/>
+
+### 微信开放社区-小游戏问答
+
+<Route author="bestony" example="/wechat-open/community/xyx-question/0" path="/wechat-open/community/xyx-question/:category" :paramsDesc="['0','hot','topic']">
+
+| 全部 | 游戏引擎 | 规则 | 账号  | 运营 | 游戏审核 | API 和组件 | 框架 | 管理后台 | 开发者工具 | 客户端 | 插件 | 云开发 | 教程反馈 | 其他 |
+| ---- | -------- | ---- | ----- | ---- | -------- | ---------- | ---- | -------- | ---------- | ------ | ---- | ------ | -------- | ---- |
+| 0    | 4096     | 8192 | 16384 | 2048 | 1        | 2          | 64   | 4        | 8          | 16     | 256  | 1024   | 128      | 32   |
+
+</Route>
+
+### 微信开放社区-小程序问答
+
+<Route author="bestony" example="/wechat-open/community/xcx-question/new" path="/wechat-open/community/xcx-question/:tag" :paramsDesc="['new','hot','topic']">
+
+| 最新 | 最热 | 热门话题 |
+| ---- | ---- | -------- |
+| new  | hot  | topic    |
+
+</Route>
 
 ### 微信支付-商户平台公告
 
